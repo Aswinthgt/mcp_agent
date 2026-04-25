@@ -15,7 +15,7 @@ spinner = Halo(text='Thinking...', spinner='dots')
 
 # locate tool server
 tool_path = Path(__file__).resolve().parent.parent / "mcp_tools" / "tools_server.py"
-
+node_tool_path = Path(__file__).resolve().parent.parent / "mcp_tools" / "toolServer.js"
 
 # MCP server configuration
 server = StdioServerParameters(
@@ -23,6 +23,10 @@ server = StdioServerParameters(
     args=[str(tool_path)]
 )
 
+server_node = StdioServerParameters(
+    command="node",
+    args=[str(node_tool_path)]
+)
 
 async def main():
 
@@ -66,11 +70,13 @@ async def main():
                 response = requests.post(
                     MODEL_URL,
                     json={
-                        "model": "gemma3",
+                        "model": "ai/gemma4:E2B",
                         "messages": messages,
                         "tools": tool_descriptions
                     }
-                ).json()
+                )
+
+                response = response.json()
 
                 # handle different API responses safely
                 if "choices" in response:
@@ -80,7 +86,7 @@ async def main():
                 else:
                     print("Unknown response:", response)
                     break
-
+                # print(message)
                 # if model calls tool
                 if "tool_calls" in message:
 
