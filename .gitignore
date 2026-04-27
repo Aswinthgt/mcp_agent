@@ -1,0 +1,27 @@
+# --- Python Artifacts ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# --- Virtual Environments ---
+venv/
+.venv/
+env/
+ENV/
+bin/
+include/
+lib/
+share/
+
+# --- Environment Variables (Security) ---
+.env
+
+# --- IDE Settings ---
+.vscode/
+.idea/
+
+# --- Build & Distribution ---
+dist/
+build/
+*.egg-info/
