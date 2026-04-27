@@ -25,3 +25,6 @@ share/
 dist/
 build/
 *.egg-info/
+
+
+# --- Environment Variables (Security) ---
